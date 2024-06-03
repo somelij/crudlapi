@@ -1,0 +1,39 @@
+<h1><%= action_name == 'new' ? 'Добавить новость' : 'Редактировать новость' %></h1>
+
+<%= form_with(model: [:admin, @news], local: true) do |form| %>
+  <% if @news.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@news.errors.count, "ошибка") %>:</h2>
+      <ul>
+        <% @news.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, 'Заголовок' %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :content, 'Содержание' %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div>
+    <%= form.label :image_url, 'Картинка' %>
+    <%= form.text_field :image_url %>
+  </div>
+
+  <div>
+    <%= form.label :hidden, 'Скрыта' %>
+    <%= form.check_box :hidden %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+<%= link_to 'Назад к списку', admin_news_index_path %>
